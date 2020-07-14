@@ -1,0 +1,54 @@
+/* CORE TEAM */
+
+Product Manager: Liam Darmody
+Contact: liamdarmody@gmail.com
+
+/* PIVOTAL LONDON */
+
+Engineer: Chris Whitty
+Contact: chris.whitty@gmail.com
+
+Engineer: Katie Moulang
+
+Engineer: Jonathan Sharpe
+Contact: mail@jonrshar.pe
+
+Engineer: Tom Brand
+Contact: tom025@me.com
+
+Product Designer: Froso Ellina
+Contact: froso.ellina@gmail.com
+
+Product Designer: Zarrin Rahman
+Contact: zarrin.rahman@gmail.com
+
+/* PIVOTAL PARIS */
+
+Engineer: Daniel Garnier-Moiroux
+Contact: git@garnier.wf
+
+/* CONTRIBUTORS */
+
+Engineer: Andrew Leung
+Contact: leung.andrew@gmail.com
+
+Enngineer: Matthew Chavez
+Contact: matthew@el-chavez.me
+
+Engineer: Mike Stallard
+Contact: mikestallard@gmail.com
+
+Engineer: Steffen Uhlig
+Contact: Steffen.Uhlig@de.ibm.com
+
+Engineer: Matthias Diester
+Contact: matthias.diester@de.ibm.com
+
+Engineer: Callum Stott
+Contact: callum@seadowg.com
+
+Engineer: Mike Kenyon
+Contact: mike.kenyon@gmail.com
+
+Engineer: Max Brauer
+Contact: github.com/mamachanko

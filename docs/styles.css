@@ -1,0 +1,806 @@
+/*
+ * Postfacto, a free, open-source and self-hosted retro tool aimed at helping remote teams.
+ *
+ * Copyright (C) 2016 - Present Pivotal Software, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ *
+ * it under the terms of the GNU Affero General Public License as
+ *
+ * published by the Free Software Foundation, either version 3 of the
+ *
+ * License, or (at your option) any later version.
+ *
+ *
+ *
+ * This program is distributed in the hope that it will be useful,
+ *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *
+ * GNU Affero General Public License for more details.
+ *
+ *
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ *
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* region Typography */
+
+body, input {
+    color: #2b3342;
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+a {
+    color: #2272ce;
+}
+
+main a:not(.button):hover {
+    color: #008573;
+}
+
+main a:not(.button):active {
+    color: #0066ab;
+}
+
+main a:not(.button):visited {
+    color: #243587;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+}
+
+footer a {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+header a, header nav button {
+    color: #13377d;
+    font-weight: bold;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header nav button {
+    font-size: inherit;
+}
+
+h1, h2, h3, h4 {
+    color: #13377d;
+}
+
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+}
+
+h2 {
+    font-size: 27px;
+    line-height: 36px;
+    margin-bottom: 24px;
+}
+
+h3 {
+    font-size: 22px;
+    line-height: 38px;
+    margin-bottom: 16px;
+    margin-top: 28px;
+}
+
+h4 {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 16px;
+}
+
+li {
+    /* Size for bullet point */
+    font-size: 12px;
+    padding-left: 10px;
+    margin-bottom: 8px;
+}
+
+li > span {
+    font-size: 16px;
+    vertical-align: top;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+#brand, #footerBrand, #mobileBrand {
+    font-size: 24px;
+    line-height: 32px;
+}
+
+#mobileBrand {
+    margin-bottom: 32px;
+}
+
+/* endregion */
+
+/* endregion */
+
+/* region Layout */
+
+* {
+    box-sizing: border-box;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+header {
+    background-color: #ffffff;
+    color: #00ae9e;
+}
+
+footer {
+    background-color: #4c8c94;
+    color: #ffffff;
+}
+
+main .section:nth-of-type(2n+1) {
+    background-color: #f8f8f8;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button {
+    background-color: #51c0b1;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px 0 rgba(47, 83, 151, 0.37);
+    color: #243587;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #008774;
+    color: #000000;
+}
+
+.button:active {
+    background-color: #00ae9e;
+    color: #000000;
+}
+
+input, .button {
+    max-width: 365px;
+}
+
+.container {
+    max-width: 1168px;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.desktop {
+    display: none;
+}
+
+.section {
+    padding: 48px 0 56px 0;
+    width: 100%;
+}
+
+/* endregion */
+
+/* region Header */
+
+header .section {
+    border-bottom: 1px solid #d3d3d3;
+    padding: 20px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.burger-container {
+    margin: auto 0;
+}
+
+.burger {
+    display: none;
+    padding: 0;
+}
+
+.script-on .burger {
+    display: block;
+    height: 24px;
+    width: 24px;
+}
+
+.burger div {
+    transition-duration: 200ms;
+    background-color: #13377d;
+    height: 3px;
+    width: 24px;
+}
+
+.burger div:not(:last-child) {
+    margin-bottom: 6px;
+}
+
+.script-on header:not(.open-menu) .mobile-nav {
+    display: none;
+}
+
+.script-on header.open-menu .burger > div:nth-child(1) {
+    margin: 0;
+    transform: translate(0, 2px) rotate(45deg);
+}
+
+.script-on header.open-menu .burger > div:nth-child(2) {
+    margin: 0;
+    transform:  translate(0, -1px) rotate(-45deg);
+}
+
+.script-on header.open-menu .burger > div:nth-child(3) {
+    display: none;
+}
+
+/* endregion */
+
+/* region Hero */
+
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url("images/mobile-home.png");
+    background-size: cover;
+    height: 0;
+    /* Subtract top padding */
+    padding-bottom: calc(100% - 48px);
+    position: relative
+}
+
+#hero h1 {
+    color: white;
+}
+
+/* endregion */
+
+/* region Introduction */
+
+#introduction .hero-text {
+    display: none;
+}
+
+.strapline {
+    margin-bottom: 24px;
+}
+
+.description {
+    margin-bottom: 32px;
+}
+
+.installation {
+    margin-bottom: 40px;
+}
+
+/* endregion */
+
+/* region Features */
+
+.tabs {
+    display: none;
+}
+
+.features-card {
+    border-left: 1px solid #243587;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 16px 16px;
+}
+
+.features-title {
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.features-card img {
+    width: 100%;
+}
+
+.features-card .image {
+    height: 100%;
+}
+
+/* endregion */
+
+/* region Benefits */
+
+#benefits {
+    text-align: center;
+}
+
+#benefits .container {
+    padding: 0 64px;
+}
+
+.benefits-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.benefits-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefits-card:not(:last-child) {
+    margin-bottom: 32px;
+}
+
+.benefits-card h4 {
+    border-bottom: 3px solid #00ae9e;
+    display: inline-block;
+    margin: 24px 0 16px 0;
+    padding-bottom: 8px;
+}
+
+.benefits-card, .benefits-text {
+        /* Fix bug in IE with flex items overflowing on small screens */
+    width: 100%;
+}
+
+.benefits-card > *, .benefits-text > * {
+    /* Fix bug with column flex items overflowing on IE - https://github.com/philipwalton/flexbugs */
+    max-width: 100%;
+}
+
+.benefits-text {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* endregion */
+
+/* region Contribute */
+
+#contribute h2 {
+    margin-bottom: 20px;
+}
+
+.contribute-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contribute-card {
+    display: flex;
+    padding: 28px 0;
+    width: 100%;
+}
+
+.contribute-card .text {
+    padding-right: 20px;
+    max-width: 371px;
+}
+
+.contribute-card:not(:last-child) {
+    border-bottom: 2px solid #cbe3fa;
+}
+
+.logo {
+    flex-shrink: 0;
+    height: 84px;
+    margin-right: 20px;
+    width: 84px;
+}
+
+.logo img {
+    height: 100%;
+    width: 100%;
+}
+
+/* endregion */
+
+/* region Footer */
+
+footer .section {
+    padding: 24px 0;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+}
+
+footer .container > *:not(:last-child) {
+    flex-shrink: 0;
+    padding-right: 48px;
+}
+
+.mailing-list {
+    margin-bottom: 40px;
+}
+
+.mailing-list .button {
+    background-color: #fec722;
+    color: #243587;
+}
+
+.mailing-list .button:hover {
+    background-color: #f7ba04;
+}
+
+.mailing-list .button:active {
+    background-color: #f7dc5f;
+}
+
+.mailing-list input {
+    border: none;
+    border-radius: 3px;
+    margin: 12px 0 24px 0;
+    outline: none;
+    padding: 10px 14px;
+    width: 100%;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-link:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+.copyright {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 48px;
+}
+
+/* endregion */
+
+/* region Responsive */
+
+@media (min-width: 691px) {
+    /* region Tablet */
+
+    /* region Hero */
+
+    #hero {
+        display: none;
+    }
+
+    /* endregion */
+
+    /* region Introduction */
+
+    #introduction {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("images/home.png");
+        background-size: cover;
+        color: #ffffff;
+    }
+
+    #introduction section {
+        width: 50%;
+    }
+
+    #introduction h1, #introduction a:not(.button) {
+        color: #ffffff;
+    }
+
+    #introduction .hero-text {
+        display: block;
+    }
+
+    /* endregion */
+
+    /* region Features */
+
+    .script-on .tabs {
+        border-bottom: solid 2px #243587;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 32px;
+        padding: 0 32px;
+    }
+
+    .tab {
+        margin-bottom: -5px;
+        padding: 14px 16px 20px 16px;
+    }
+
+    .tab.active {
+        border-bottom: 8px solid #00ae9e;
+        padding-bottom: 12px;
+    }
+
+    .tab:not(.active):hover, .tab:not(.active):focus {
+        color: #2b3342;
+        border-bottom: 8px solid #c7c7c7;
+        padding-bottom: 12px;
+    }
+
+    .tab:not(.active) {
+        border-bottom: none;
+        color: #6b717a;
+    }
+
+    .script-on .features-title {
+        display: none;
+    }
+
+    .script-on .features-title.tab {
+        display: block;
+    }
+
+    .features-title.tab {
+        font-size: 20px;
+    }
+
+    .features-card {
+        flex-direction: row-reverse;
+    }
+
+    .script-on .features-card {
+        border: none;
+    }
+
+    .features-card h3 {
+        margin-top: 0;
+    }
+
+    .script-on .features-card:not(.active) {
+        display: none;
+    }
+
+    .features-card .image {
+        flex-shrink: 0;
+        width: 50%;
+    }
+
+    .features-card .text {
+        padding-right: 40px;
+    }
+
+    /* endregion */
+
+    /* region Benefits */
+
+    #benefits {
+        text-align: left;
+    }
+
+    .benefits-card {
+        flex-direction: row;
+    }
+
+    .benefits-image {
+        min-width: 200px;
+    }
+
+    .benefits-text {
+        align-items: flex-start;
+    }
+
+    /* endregion */
+
+    /* region Contribute */
+
+    .contribute-card {
+        flex-direction: row-reverse;
+        width: calc(50% - 14px);
+    }
+
+    .contribute-card:nth-of-type(3) {
+        border-bottom: none;
+    }
+
+    /* endregion */
+
+    /* endregion */
+}
+
+@media (min-width: 857px) {
+    /* region Desktop */
+
+    /* region Typography */
+
+    body {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    h1 {
+        font-size: 48px;
+        line-height: 68px;
+    }
+
+    h2 {
+        font-size: 42px;
+        line-height: 56px;
+        margin-bottom: 32px;
+    }
+
+    h3 {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    h4 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    footer {
+        font-size: initial;
+    }
+
+    #brand, #mobileBrand {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    #footerBrand {
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+    /* endregion */
+
+    /* region Layout */
+
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    li {
+        margin-bottom: 16px;
+    }
+
+    .button {
+        padding: 12px 36px;
+    }
+
+    .button, input, .mailing-list input {
+        width: 640px;
+    }
+
+    /* endregion */
+
+    /* region Header */
+
+    nav {
+        height: 100%;
+    }
+
+    nav .header-link {
+        padding-bottom: 8px;
+    }
+
+    nav .header-link:hover {
+        border-bottom: 3px solid #51c0b1;
+        padding-bottom: 5px;
+    }
+
+    nav .header-link:not(:first-child) {
+        margin-left: 48px;
+    }
+
+    /* endregion */
+
+    /* region Introduction */
+
+    #introduction {
+        height: 700px;
+    }
+
+    .description {
+        margin-bottom: 40px;
+    }
+
+    .installation {
+        margin-bottom: 48px;
+    }
+
+    /* endregion */
+
+    /* region Features */
+
+    .features-title.tab {
+        font-size: 22px;
+    }
+
+    /* endregion */
+
+    /* region Benefits */
+
+    #benefits {
+        text-align: center;
+    }
+
+    #benefits .container {
+        padding: 0 20px;
+    }
+    .benefits-card {
+        width: calc(33% - 19px);
+        flex-direction: column;
+    }
+
+    .benefits-card:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .benefits-text {
+        align-items: center;
+    }
+
+    /* endregion */
+
+    /* region Contribute */
+
+    #contribute h2 {
+        margin-bottom: 24px;
+    }
+
+    /* endregion */
+
+    /* region Footer */
+
+    footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    footer .container > * {
+        margin: auto;
+    }
+
+    .copyright {
+        text-align: right;
+        margin-top: 0;
+    }
+
+    /* endregion */
+
+    /* endregion */
+}
+
+/* endregion */
